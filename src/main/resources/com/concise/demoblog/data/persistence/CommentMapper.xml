@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.concise.demoblog.data.persistence.CommentMapper">
+	
+	<insert id="add" parameterType="com.concise.demoblog.data.entity.Comment" useGeneratedKeys="true" keyProperty="id">
+		insert into blog_comment
+			(id  content , parentId , articleId , userName , userEmail , userLink , isrecover )
+		values(#{id} ,  #{content} ,  #{parentId} ,  #{articleId} ,  #{userName} ,  #{userEmail} ,  #{userLink} , #{isrecover} )
+	</insert>
+	
+	<update id="delete" parameterType="java.lang.Integer">
+		update blog_comment set isrecover = 0 where id = #{id}
+	</update>
+	
+	<update id="update" parameterType="com.concise.demoblog.data.entity.Comment">
+		update blog_comment set 
+			content = #{content}
+		where
+			id = #{id}
+	</update>
+	
+	<select id="getCommentsByArrticleId" parameterType="java.lang.Integer" resultType="com.concise.demoblog.data.entity.Comment">
+		select * from blog_comment where articleId = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.concise.demoblog.data.persistence.LinkMapper">
+	
+	<insert id="add" parameterType="com.concise.demoblog.data.entity.Link" useGeneratedKeys="true" keyProperty="id">
+		insert into blog_link (id , title , url , random ) values(#{id} ,  #{title} ,  #{url} ,  #{random} )
+	</insert>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete blog_link where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="com.concise.demoblog.data.entity.Link">
+		update blog_link set 
+			title = #{title} , 
+			url = #{url}
+		where
+			id = #{id}
+	</update>
+	
+	<select id="getLinksByRandom" resultType="com.concise.demoblog.data.entity.Link" parameterType="java.lang.Integer">
+		select * from blog_link where random = #{random}
+	</select>
+	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.concise.demoblog.data.persistence.ArticleMapper">
+	
+	<insert id="add" parameterType="com.concise.demoblog.data.entity.Article" useGeneratedKeys="true" keyProperty="id">
+		insert into blog_article
+			(id , title , content , description , tags , cateid , isrecover ,staticurl , contentSource)
+		values(#{id} ,  #{title} ,  #{content} ,  #{description} ,  #{tags} ,  #{cateid} ,  #{isrecover} ,#{contentSource} )
+	</insert>
+	
+	<update id="delete" parameterType="java.lang.Integer">
+		update blog_article set isrecover = 0 where id = #{id}
+	</update>
+	
+	<update id="update" parameterType="com.concise.demoblog.data.entity.Article">
+		update blog_article set 
+			title = #{title} ,
+			content = #{content} ,
+			description = #{description} ,
+			tags= #{tags} ,
+			cateid = #{cateid} ,
+			isrecover = #{isrecover} , 
+			staticurl = #{staticurl} , 
+			contentSource = #{contentSource}
+		where
+			id = #{id}
+	</update>
+	
+	<select id="getArticleById" parameterType="java.lang.Integer" resultType="com.concise.demoblog.data.entity.Article">
+		select * from blog_article where id = #{id}
+	</select>
+	
+	<select id="getArticles" resultType="com.concise.demoblog.data.entity.Article">
+		select * from blog_article
+	</select>
+	
+	<select id="getArticlesBykeyword" resultType="com.concise.demoblog.data.entity.Article" parameterType="java.lang.String">
+		select * from blog_article where title like "%"#{keyword}"%"  or content like "%"#{keyword}"%"
+	</select>
+	
+	<select id="getArticleByStaticURL" parameterType="java.lang.String" resultType="com.concise.demoblog.data.entity.Article" >
+		select * from blog_article where staticurl = #{staticURL}
+	</select>
+	
+	<select id="getArticlesByCategoryId" parameterType="java.lang.Integer" resultType="com.concise.demoblog.data.entity.Article" >
+		select * from blog_article where cateid = #{id}
+	 </select>
+</mapper>

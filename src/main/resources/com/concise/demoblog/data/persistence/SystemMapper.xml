@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.concise.demoblog.data.persistence.SystemMapper">
+	
+	<insert id="add" parameterType="com.concise.demoblog.data.entity.System">
+		insert into blog_system (title , key , description , icp , seo , readonly ,url ) 
+		values(#{title} ,  #{key},  #{description},  #{icp},  #{seo},  #{readonly} ,#{url} )
+	</insert>
+	
+	<update id="update" parameterType="com.concise.demoblog.data.entity.System">
+		update blog_system set 
+			title = #{title} ,  
+			key = #{key} ,  
+			description = #{description} ,  
+			icp = #{icp} ,  
+			seo = #{seo} ,  
+			readonly = #{readonly} , 
+			url = #{url} , 
+		where
+			id = #{id}
+	</update>
+	
+	<select id="getSystem" resultType="com.concise.demoblog.data.entity.System">
+		select * from blog_system
+	</select>	
+</mapper>
